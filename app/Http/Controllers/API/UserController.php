@@ -25,10 +25,10 @@ class UserController extends Controller
             );
 
             //memeriksa credentials login
-            $credentialas = request(['email', 'password']);
+            $credentials = request(['email', 'password']);
 
             //jika email/password salah
-            if(!Auth::attempt($credentialas)){
+            if(!Auth::attempt($credentials)){
                 return ResponseFormatter::error([
                     'message' => 'Unauthorized'
                 ], 'Authentication Failed', 500);
@@ -36,12 +36,13 @@ class UserController extends Controller
 
             //password tidak sesuai
             $user = User::where('email', $request->email)->first();
-            if(!Hash::check($request->password, $user->password, [])){
+            if(!Hash::check($request->password, $user->password)){
                 throw new \Exception('Invalid Credentials');
             }
 
             //jika berhasil login
             $tokenResult = $user->createToken('authToken')->plainTextToken;
+            
 
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
@@ -74,7 +75,7 @@ class UserController extends Controller
                 'city' => 'nullable'
             ]);
 
-
+            $save_file = null;
             if($request->file('picture_path')){
                 $file = $request->file('picture_path');
                 $file_name = 'profile-photo-'.$request->name.".".$file->extension();
@@ -124,7 +125,7 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        
+
 
         // print_r($request->houseNumber);
 
@@ -154,7 +155,7 @@ class UserController extends Controller
             ->storeAs('assets/user', 'profile-photo-'.$request->name.".".$request->file('picture_path')->extension(), 'public');
         }
         $user->update($data);
-        
+
         return ResponseFormatter::success($user, 'Profile Updated');
     }
 

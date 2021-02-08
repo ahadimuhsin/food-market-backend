@@ -24,3 +24,8 @@ Route::get('/debug-sentry', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+//midtrans page
+Route::get('midtrans/success', 'API\MidtransController@success');
+Route::get('midtrans/unfinish', 'API\MidtransController@unfinish');
+Route::get('midtrans/error', 'API\MidtransController@error');
