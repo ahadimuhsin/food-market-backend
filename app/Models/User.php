@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password',
         'picture_path',
         'profile_photo_path',
+        'address',
         'role',
         'houseNumber',
         'contact',
@@ -61,9 +62,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    // protected $appends = [
+    //     'profile_photo_path',
+    // ];
 
     public function getCreatedAtAttribute($value)
     {

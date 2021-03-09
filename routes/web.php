@@ -27,6 +27,7 @@ Route::prefix('/dashboard')
     ->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
+    Route::resource('foods', FoodController::class);
 });
 
 
