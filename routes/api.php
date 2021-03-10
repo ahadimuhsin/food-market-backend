@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('transaction/{id}', 'TransactionController@update');
    Route::post('logout', 'UserController@logout');
    Route::post('transaction', 'TransactionController@checkout');
+   Route::get('food', 'FoodController@all');
 });
+
 
 Route::post('midtrans/callback', 'MidtransController@callback');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
 // use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,9 @@ Route::prefix('/dashboard')
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource('foods', FoodController::class);
+    Route::get('transactions/{id}/status/{status}', [TransactionController::class, 'changeStatus'])
+    ->name('transactions.changeStatus');
+    Route::resource('transactions', 'TransactionController');
 });
 
 
