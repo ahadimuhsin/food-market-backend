@@ -20,7 +20,7 @@ Route::get('food', 'FoodController@all');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::get('user', 'UserController@fetch');
-   Route::post('update-profile', 'UserController@updateProfile');
+   Route::post('user', 'UserController@updateProfile');
    Route::post('user/photo', 'UserController@updatePhoto');
    Route::get('transaction', 'TransactionController@all');
    Route::post('transaction/{id}', 'TransactionController@update');

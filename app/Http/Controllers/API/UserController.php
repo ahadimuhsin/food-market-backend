@@ -42,7 +42,7 @@ class UserController extends Controller
 
             //jika berhasil login
             $tokenResult = $user->createToken('authToken')->plainTextToken;
-            
+
 
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
@@ -66,7 +66,7 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required|max:255',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:6',
+                'password' => 'required|string|confirmed|min:6',
                 'role' => 'string|nullable',
                 'picture_path' => 'nullable|image|mimes:jpg,jpeg,png,bmp|max:2048',
                 'address' => 'nullable',
